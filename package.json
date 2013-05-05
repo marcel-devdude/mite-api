@@ -1,0 +1,36 @@
+{
+  "name": "mite-api",
+  "description": "Simple Node.js module to access the mite-api.",
+  "version": "0.1.0",
+  "homepage": "https://github.com/marcel-devdude/mite-api",
+  "author": {
+    "name": "Marcel Meyer",
+    "email": "kontakt@devdu.de"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/marcel-devdude/mite-api.git"
+  },
+  "bugs": {
+    "url": "https://github.com/marcel-devdude/mite-api/issues"
+  },
+  "main": "index",
+  "engines": {
+    "node": ">= 0.8.0"
+  },
+  "dependencies": {
+    "underscore": "~1.4.4",
+    "request": "2.21.x"
+  },
+  "devDependencies": {
+    "grunt-contrib-watch": "~0.2.0",
+    "coffee-script": "~1.4.0",
+    "grunt": "~0.4.0",
+    "grunt-contrib": "0.4.x",
+    "grunt-contrib-coffee": "0.4.x",
+    "grunt-contrib-clean": "0.4.x",
+    "mocha": "1.9.x",
+    "should": "~1.2.2"
+  },
+  "keywords": []
+}
