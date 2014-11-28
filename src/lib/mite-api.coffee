@@ -54,14 +54,26 @@ module.exports = (options) ->
       switch response.req.method
         when 'GET', 'PUT', 'DELETE'
           if response.statusCode == 200
-            body = JSON.parse body
+            _body = body;
+
+            try
+              body = JSON.parse body
+            catch(err)
+              body = _body
+            
             err = null
           else
             err = response.statusCode + body
 
         when 'POST'
           if response.statusCode == 401
-            body = JSON.parse body
+             _body = body;
+
+            try
+              body = JSON.parse body
+            catch(err)
+              body = _body
+              
             err = null
           else
             err = body
