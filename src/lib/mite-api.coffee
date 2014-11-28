@@ -60,7 +60,7 @@ module.exports = (options) ->
             err = response.statusCode + body
 
         when 'POST'
-          if response.statusCode == 401
+          if response.statusCode == 201
             body = JSON.parse body
             err = null
           else
