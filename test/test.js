@@ -11,9 +11,9 @@
     it('should be set default options', function() {
       var mite;
       mite = miteApi();
-      mite.getOption('account').should.be["false"];
-      mite.getOption('apiKey').should.be["false"];
-      return mite.getOption('applicationName').should.be["false"];
+      mite.getOption('account').should.be.false;
+      mite.getOption('apiKey').should.be.false;
+      return mite.getOption('applicationName').should.be.false;
     });
     return it('should be overwrite default options', function() {
       var mite;
