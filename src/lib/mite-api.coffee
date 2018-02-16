@@ -58,22 +58,22 @@ module.exports = (options) ->
 
             try
               body = JSON.parse body
-            catch(err)
+            catch err
               body = _body
-            
+
             err = null
           else
             err = response.statusCode + body
 
         when 'POST'
           if response.statusCode == 401
-             _body = body;
+            _body = body;
 
             try
               body = JSON.parse body
-            catch(err)
+            catch err
               body = _body
-              
+
             err = null
           else
             err = body

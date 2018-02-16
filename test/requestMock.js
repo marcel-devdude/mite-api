@@ -1,5 +1,4 @@
 (function() {
-
   module.exports = function(options, done) {
     var accountMock, body, customerMock, entryMock, err, method, projectMock, response, serviceMock, url, userMock;
     err = null;
