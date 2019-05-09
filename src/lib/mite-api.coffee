@@ -49,40 +49,34 @@ module.exports = (options) ->
 
   handleResponse = (err, response, body, done) ->
     if err
-      done err, null
-    else
-      switch response.req.method
-        when 'GET', 'PUT', 'DELETE'
-          if response.statusCode == 200
-            _body = body;
+      return done err, null
 
-            try
-              body = JSON.parse body
-            catch err
-              body = _body
+    // always try to parse body as JSON
+    try
+      body = JSON.parse body
+    catch err
 
-            err = null
-          else
-            err = response.statusCode + body
-
-        when 'POST'
-          if response.statusCode == 401
-            _body = body;
-
-            try
-              body = JSON.parse body
-            catch err
-              body = _body
-
-            err = null
-          else
-            err = body
-
+    switch response.req.method
+      when 'GET', 'PUT', 'DELETE'
+        if response.statusCode == 200
+          err = null
         else
-          body = null
-          err = 500
+          err = new Error body.error || body
+          err.response = response;
 
-      done err, body
+      when 'POST'
+        if response.statusCode == 401
+          err = null
+        else
+          err = new Error body.error || body
+          err.response = response;
+
+      else
+        body = null
+        err = new Error 500
+        err.response = response;
+
+    done err, body
 
   makeRequest = (args..., done) ->
     requestOptions = _.extend {
