@@ -16,7 +16,7 @@
   },
   "main": "index",
   "engines": {
-    "node": ">= 0.8.0"
+    "node": ">= 6"
   },
   "scripts": {
     "update": "npm-check --update",
@@ -25,8 +25,7 @@
     "watch": "grunt watch"
   },
   "dependencies": {
-    "request": "^2.83.0",
-    "underscore": "^1.8.3"
+    "request": "^2.83.0"
   },
   "devDependencies": {
     "grunt-cli": "^1.2.0",

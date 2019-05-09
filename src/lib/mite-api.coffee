@@ -1,4 +1,3 @@
-_ = require 'underscore'
 url = require 'url'
 request = require 'request'
 
@@ -43,7 +42,7 @@ module.exports = (options) ->
     }
   }
 
-  options = _.extend defaults, options
+  options = Object.assign {}, defaults, options
 
   api = {}
 
@@ -85,14 +84,14 @@ module.exports = (options) ->
       done err, body
 
   makeRequest = (args..., done) ->
-    requestOptions = _.extend {
+    requestOptions = Object.assign {
       url: args[0]
       headers: {
         'User-Agent': options.applicationName
       }
     }, args[1]
 
-    if _.indexOf ['POST', 'PUT', 'DELETE'], requestOptions.method != -1
+    if ['POST', 'PUT', 'DELETE'].indexOf requestOptions.method != -1
       requestOptions.headers['Content-Type'] = 'application/json'
 
     if options.query == false
