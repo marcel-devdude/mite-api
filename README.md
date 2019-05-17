@@ -47,7 +47,7 @@ The `done` callback is called when the request has finished. The first parameter
 
 * mite.getAccount()
 * mite.getMyself()
-* mite.getTimeEntires([options], done)
+* mite.getTimeEntries([options], done)
 * mite.getDailyTimeEntries(year, month, day, [options], done)
 * mite.getTimeEntry(id, [options], done)
 * mite.addTimeEntry(entry, done)
