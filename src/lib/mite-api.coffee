@@ -1,4 +1,3 @@
-_ = require 'underscore'
 url = require 'url'
 request = require 'request'
 
@@ -43,56 +42,50 @@ module.exports = (options) ->
     }
   }
 
-  options = _.extend defaults, options
+  options = Object.assign {}, defaults, options
 
   api = {}
 
   handleResponse = (err, response, body, done) ->
     if err
-      done err, null
-    else
-      switch response.req.method
-        when 'GET', 'PUT', 'DELETE'
-          if response.statusCode == 200
-            _body = body;
+      return done err, null
 
-            try
-              body = JSON.parse body
-            catch err
-              body = _body
+    // always try to parse body as JSON
+    try
+      body = JSON.parse body
+    catch err
 
-            err = null
-          else
-            err = response.statusCode + body
-
-        when 'POST'
-          if response.statusCode == 201
-            _body = body;
-
-            try
-              body = JSON.parse body
-            catch err
-              body = _body
-
-            err = null
-          else
-            err = body
-
+    switch response.req.method
+      when 'GET', 'PUT', 'DELETE'
+        if response.statusCode == 200
+          err = null
         else
-          body = null
-          err = 500
+          err = new Error body.error || body
+          err.response = response;
 
-      done err, body
+      when 'POST'
+        if response.statusCode == 201
+          err = null
+        else
+          err = new Error body.error || body
+          err.response = response;
+
+      else
+        body = null
+        err = new Error 500
+        err.response = response;
+
+    done err, body
 
   makeRequest = (args..., done) ->
-    requestOptions = _.extend {
+    requestOptions = Object.assign {
       url: args[0]
       headers: {
         'User-Agent': options.applicationName
       }
     }, args[1]
 
-    if _.indexOf ['POST', 'PUT', 'DELETE'], requestOptions.method != -1
+    if ['POST', 'PUT', 'DELETE'].indexOf requestOptions.method != -1
       requestOptions.headers['Content-Type'] = 'application/json'
 
     if options.query == false
