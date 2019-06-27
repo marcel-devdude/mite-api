@@ -64,7 +64,7 @@ module.exports = (options) ->
           err.response = response;
 
       when 'POST'
-        if response.statusCode == 401
+        if response.statusCode == 201
           err = null
         else
           err = new Error body.error || body
