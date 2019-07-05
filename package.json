@@ -21,9 +21,10 @@
   },
   "scripts": {
     "update": "npm-check --update",
-    "test": "mocha",
+    "test": "npm run -s build && mocha",
     "tdd": "npm run test -- --watch",
-    "watch": "grunt watch"
+    "watch": "grunt watch",
+    "build": "grunt",
     "preversion": "npm run -s build && npm test"
   },
   "dependencies": {
