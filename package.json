@@ -1,7 +1,7 @@
 {
   "name": "mite-api",
   "description": "Simple Node.js module to access the mite-api.",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "homepage": "https://github.com/marcel-devdude/mite-api",
   "license": "MIT",
   "author": {
