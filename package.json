@@ -24,6 +24,7 @@
     "test": "mocha",
     "tdd": "npm run test -- --watch",
     "watch": "grunt watch"
+    "preversion": "npm run -s build && npm test"
   },
   "dependencies": {
     "request": "^2.88.0"
