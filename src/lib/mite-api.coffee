@@ -50,7 +50,7 @@ module.exports = (options) ->
     if err
       return done err, null
 
-    // always try to parse body as JSON
+    # always try to parse body as JSON
     try
       body = JSON.parse body
     catch err

@@ -37,6 +37,54 @@ describe 'URL', ->
 
 describe 'API', ->
 
+  describe 'getAccount', ->
+    # mock failed getAccount request
+    getAccountRequestMock = (options, done) ->
+      response =
+        statusCode: 400,
+        req: { method: 'POST' }
+      body = {
+        error: 'Whoops! We couldn\'t find your account'
+      };
+      done null, response, body
+
+    mite = miteApi {
+      account: 'account',
+      apiKey: 'apikey',
+      applicationName: 'applicationname',
+      request: getAccountRequestMock
+    }
+
+    it 'when not found calls the callback with an error object', (done) ->
+      mite.getAccount (err, body) ->
+        err.should.be.an.instanceOf Error
+        err.message.should.equal 'Whoops! We couldn\'t find your account'
+        done()
+
+  describe 'deleteProject', ->
+    # momck a failed deleteProject request
+    deleteProjectRequestMock = (options, done) ->
+      response =
+        statusCode: 404,
+        req: { method: 'POST' }
+
+      body = {
+        error: 'Der Datensatz ist nicht vorhanden'
+      };
+      done null, response, body
+    mite = miteApi {
+      account: 'account',
+      apiKey: 'apikey',
+      applicationName: 'applicationname',
+      request: deleteProjectRequestMock
+    }
+
+    it 'calls done with rror when project was not found', (done) ->
+      mite.deleteProject 21, (err, body) ->
+        err.should.be.an.instanceOf Error
+        err.message.should.equal 'Der Datensatz ist nicht vorhanden'
+        done()
+
   describe 'Service', ->
     mite = miteApi { account: 'account', apiKey: 'apikey', applicationName: 'applicationname', request: requestMock }
 

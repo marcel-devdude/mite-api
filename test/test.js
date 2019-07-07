@@ -77,55 +77,65 @@
 
   describe('API', function() {
     describe('getAccount', function() {
-      it('when not found calls the callback with an error object', function(done) {
-        var mite = miteApi({
-          account: 'account',
-          apiKey: 'apikey',
-          applicationName: 'applicationname',
-          request: function(options, done) {
-            var response = {
-              statusCode: 400,
-              req: { method: 'POST' }
-            };
-            var body = {
-              error: 'Whoops! We couldn\'t find your account'
-            };
-            done(null, response, body);
+      var getAccountRequestMock, mite;
+      // mock failed getAccount request
+      getAccountRequestMock = function(options, done) {
+        var body, response;
+        response = {
+          statusCode: 400,
+          req: {
+            method: 'POST'
           }
-        });
+        };
+        body = {
+          error: 'Whoops! We couldn\'t find your account'
+        };
+        return done(null, response, body);
+      };
+      mite = miteApi({
+        account: 'account',
+        apiKey: 'apikey',
+        applicationName: 'applicationname',
+        request: getAccountRequestMock
+      });
+      return it('when not found calls the callback with an error object', function(done) {
         return mite.getAccount(function(err, body) {
           err.should.be.an.instanceOf(Error);
           err.message.should.equal('Whoops! We couldn\'t find your account');
           return done();
         });
       });
-    }); // getAccount
-
+    });
     describe('deleteProject', function() {
-      it('calls done with rror when project was not found', function(done) {
-        var mite = miteApi({
-          account: 'account',
-          apiKey: 'apikey',
-          applicationName: 'applicationname',
-          request: function(options, done) {
-            var response = {
-              statusCode: 404,
-              req: { method: 'POST' }
-            };
-            var body = {
-              error: 'Der Datensatz ist nicht vorhanden'
-            };
-            done(null, response, body);
+      var deleteProjectRequestMock, mite;
+      // momck a failed deleteProject request
+      deleteProjectRequestMock = function(options, done) {
+        var body, response;
+        response = {
+          statusCode: 404,
+          req: {
+            method: 'POST'
           }
-        });
+        };
+        body = {
+          error: 'Der Datensatz ist nicht vorhanden'
+        };
+        return done(null, response, body);
+      };
+      mite = miteApi({
+        account: 'account',
+        apiKey: 'apikey',
+        applicationName: 'applicationname',
+        request: deleteProjectRequestMock
+      });
+      return it('calls done with rror when project was not found', function(done) {
         return mite.deleteProject(21, function(err, body) {
           err.should.be.an.instanceOf(Error);
           err.message.should.equal('Der Datensatz ist nicht vorhanden');
           return done();
         });
       });
-    }); // deleteProject
-
+    });
     describe('Service', function() {
       var mite;
       mite = miteApi({
