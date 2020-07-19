@@ -24,10 +24,12 @@
   },
   "main": "index",
   "engines": {
-    "node": ">= 6"
+    "node": ">= 8.17.0"
   },
   "scripts": {
-    "preversion": "npm test",
+    "lint:fix": "npm run lint -- --fix",
+    "lint": "eslint lib",
+    "preversion": "npm test && npm lint",
     "tdd": "npm test -- --watch",
     "test": "mocha"
   },
@@ -35,6 +37,7 @@
     "request": "^2.88.2"
   },
   "devDependencies": {
+    "eslint": "^6.8.0",
     "mocha": "^5.0.1",
     "should": "^13.2.1"
   }
