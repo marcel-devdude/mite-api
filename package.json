@@ -30,7 +30,7 @@
     "changelog:preview": "conventional-changelog --output-unreleased -p angular",
     "changelog": "conventional-changelog -s -i CHANGELOG.md -p angular -r 0",
     "lint:fix": "npm run lint -- --fix",
-    "lint": "eslint lib",
+    "lint": "eslint ./",
     "preversion": "npm test && npm lint",
     "tdd": "npm test -- --watch",
     "test": "mocha",

@@ -1,7 +1,7 @@
 'use strict';
 
-var mocha = require('mocha');
-var should = require('should');
+require('mocha');
+require('should');
 var requestMock = require('./mock/request');
 var miteApi = require('../lib/mite-api');
 
@@ -97,7 +97,7 @@ describe('API', function() {
       request: getAccountRequestMock
     });
     return it('when not found calls the callback with an error object', function(done) {
-      return mite.getAccount(function(err, body) {
+      return mite.getAccount(function(err) {
         err.should.be.an.instanceOf(Error);
         err.message.should.equal('Whoops! We couldn\'t find your account');
         return done();
@@ -127,7 +127,7 @@ describe('API', function() {
       request: deleteProjectRequestMock
     });
     return it('calls done with rror when project was not found', function(done) {
-      return mite.deleteProject(21, function(err, body) {
+      return mite.deleteProject(21, function(err) {
         err.should.be.an.instanceOf(Error);
         err.message.should.equal('Der Datensatz ist nicht vorhanden');
         return done();
@@ -214,7 +214,7 @@ describe('API', function() {
       });
     });
     return it('should be able to delete service', function(done) {
-      return mite.deleteService(1, function(err, service) {
+      return mite.deleteService(1, function() {
         return done();
       });
     });
@@ -304,7 +304,7 @@ describe('API', function() {
       });
     });
     return it('should be able to delete customer', function(done) {
-      return mite.deleteCustomer(1, function(err, customer) {
+      return mite.deleteCustomer(1, function() {
         return done();
       });
     });
@@ -414,7 +414,7 @@ describe('API', function() {
       });
     });
     return it('should be able to delete project', function(done) {
-      return mite.deleteProject(1, function(err, project) {
+      return mite.deleteProject(1, function() {
         return done();
       });
     });
@@ -622,7 +622,7 @@ describe('API', function() {
       });
     });
     return it('should be able to delete time entry', function(done) {
-      return mite.deleteTimeEntry(1, function(err, entry) {
+      return mite.deleteTimeEntry(1, function() {
         return done();
       });
     });
