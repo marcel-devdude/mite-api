@@ -98,7 +98,7 @@ module.exports = function(options, done) {
     }
   };
   switch (url) {
-    case 'https://account.mite.yo.lk/services.json':
+    case 'https://account.mite.de/services.json':
       if (options.method === 'POST') {
         response.statusCode = 401;
         body = serviceMock;
@@ -107,15 +107,15 @@ module.exports = function(options, done) {
         body = [serviceMock];
       }
       break;
-    case 'https://account.mite.yo.lk/services/archived.json':
+    case 'https://account.mite.de/services/archived.json':
       response.statusCode = 200;
       body = [serviceMock];
       break;
-    case 'https://account.mite.yo.lk/services/1.json':
+    case 'https://account.mite.de/services/1.json':
       response.statusCode = 200;
       body = serviceMock;
       break;
-    case 'https://account.mite.yo.lk/customers.json':
+    case 'https://account.mite.de/customers.json':
       if (options.method === 'POST') {
         response.statusCode = 401;
         body = customerMock;
@@ -124,15 +124,15 @@ module.exports = function(options, done) {
         body = [customerMock];
       }
       break;
-    case 'https://account.mite.yo.lk/customers/archived.json':
+    case 'https://account.mite.de/customers/archived.json':
       response.statusCode = 200;
       body = [customerMock];
       break;
-    case 'https://account.mite.yo.lk/customers/1.json':
+    case 'https://account.mite.de/customers/1.json':
       response.statusCode = 200;
       body = customerMock;
       break;
-    case 'https://account.mite.yo.lk/projects.json':
+    case 'https://account.mite.de/projects.json':
       if (options.method === 'POST') {
         response.statusCode = 401;
         body = projectMock;
@@ -141,31 +141,31 @@ module.exports = function(options, done) {
         body = [projectMock];
       }
       break;
-    case 'https://account.mite.yo.lk/projects/archived.json':
+    case 'https://account.mite.de/projects/archived.json':
       response.statusCode = 200;
       body = [projectMock];
       break;
-    case 'https://account.mite.yo.lk/projects/1.json':
+    case 'https://account.mite.de/projects/1.json':
       response.statusCode = 200;
       body = projectMock;
       break;
-    case 'https://account.mite.yo.lk/users.json':
+    case 'https://account.mite.de/users.json':
       response.statusCode = 200;
       body = [userMock];
       break;
-    case 'https://account.mite.yo.lk/users/archived.json':
+    case 'https://account.mite.de/users/archived.json':
       response.statusCode = 200;
       body = [userMock];
       break;
-    case 'https://account.mite.yo.lk/users/1.json':
+    case 'https://account.mite.de/users/1.json':
       response.statusCode = 200;
       body = userMock;
       break;
-    case 'https://account.mite.yo.lk/daily/2013/1/1.json':
+    case 'https://account.mite.de/daily/2013/1/1.json':
       response.statusCode = 200;
       body = [entryMock];
       break;
-    case 'https://account.mite.yo.lk/time_entries.json':
+    case 'https://account.mite.de/time_entries.json':
       if (options.method === 'POST') {
         response.statusCode = 401;
         body = entryMock;
@@ -174,15 +174,15 @@ module.exports = function(options, done) {
         body = [entryMock];
       }
       break;
-    case 'https://account.mite.yo.lk/time_entries/1.json':
+    case 'https://account.mite.de/time_entries/1.json':
       response.statusCode = 200;
       body = entryMock;
       break;
-    case 'https://account.mite.yo.lk/myself.json':
+    case 'https://account.mite.de/myself.json':
       response.statusCode = 200;
       body = userMock;
       break;
-    case 'https://account.mite.yo.lk/account.json':
+    case 'https://account.mite.de/account.json':
       response.statusCode = 200;
       body = accountMock;
       break;

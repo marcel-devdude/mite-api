@@ -1,6 +1,6 @@
 # mite-api
 
-Simple Node.js module to access the [mite-api](http://mite.yo.lk/en/api/).
+Simple Node.js module to access the [mite-api](http://mite.de/en/api/).
 
 ## Getting Started
 Install the module with: `npm install mite-api`
@@ -25,7 +25,7 @@ Available options are:
 
 ## API-Methods
 
-The optional `options`-object is passed as query parameters to the api-url. For example you can add properties to limit the output. See the [mite-api](http://mite.yo.lk/en/api/) for more information.
+The optional `options`-object is passed as query parameters to the api-url. For example you can add properties to limit the output. See the [mite-api](http://mite.de/en/api/) for more information.
 
 ```javascript
 var options = {
@@ -33,7 +33,7 @@ var options = {
     page: 2
 };
 
-// more complex example (http://mite.yo.lk/en/api/time-entries.html)
+// more complex example (http://mite.de/en/api/time-entries.html)
 var options = {
     customer_id: 1,
     billable: true,

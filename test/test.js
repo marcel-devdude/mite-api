@@ -34,7 +34,7 @@ describe('URL', function() {
       apiKey: 'apikey',
       applicationName: 'applicationname'
     });
-    return mite.getUrl('services').should.equal('https://account.mite.yo.lk/services.json');
+    return mite.getUrl('services').should.equal('https://account.mite.de/services.json');
   });
   it('should be a valid API-URL with an api_key query-parameter', function() {
     var mite;
@@ -44,7 +44,7 @@ describe('URL', function() {
       applicationName: 'applicationname',
       query: true
     });
-    return mite.getUrl('services').should.equal('https://account.mite.yo.lk/services.json?api_key=apikey');
+    return mite.getUrl('services').should.equal('https://account.mite.de/services.json?api_key=apikey');
   });
   it('should be a valid API-URL with a filter query-parameter', function() {
     var mite;
@@ -56,7 +56,7 @@ describe('URL', function() {
     return mite.getUrl('services', {
       limit: 50,
       page: 2
-    }).should.equal('https://account.mite.yo.lk/services.json?limit=50&page=2');
+    }).should.equal('https://account.mite.de/services.json?limit=50&page=2');
   });
   return it('should be a valid API-URL with placeholders', function() {
     var mite;
@@ -69,7 +69,7 @@ describe('URL', function() {
       year: 2013,
       month: 1,
       day: 1
-    }).should.equal('https://account.mite.yo.lk/daily/2013/1/1.json');
+    }).should.equal('https://account.mite.de/daily/2013/1/1.json');
   });
 });
 
