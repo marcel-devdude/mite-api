@@ -43,5 +43,8 @@
     "eslint": "9.35.0",
     "mocha": "11.7.2",
     "should": "^13.2.1"
+  },
+  "dependencies": {
+    "axios": "1.11.0"
   }
 }
