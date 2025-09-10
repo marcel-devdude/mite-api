@@ -2,7 +2,7 @@
 
 require('mocha');
 require('should');
-var requestMock = require('./mock/request');
+var axiosMock = require('./mock/axios');
 var miteApi = require('../lib/mite-api');
 
 describe('Configuration', function() {
@@ -77,18 +77,18 @@ describe('API', function() {
   describe('getAccount', function() {
     var getAccountRequestMock, mite;
     // mock failed getAccount request
-    getAccountRequestMock = function(options, done) {
+    getAccountRequestMock = function(options) {
       var body, response;
       response = {
-        statusCode: 400,
-        req: {
-          method: 'POST'
+        status: 400,
+        data: {
+          error: 'Whoops! We couldn\'t find your account'
+        },
+        config: {
+          method: 'post'
         }
       };
-      body = {
-        error: 'Whoops! We couldn\'t find your account'
-      };
-      return done(null, response, body);
+      return Promise.resolve(response);
     };
     mite = miteApi({
       account: 'account',
@@ -106,19 +106,19 @@ describe('API', function() {
   });
   describe('deleteProject', function() {
     var deleteProjectRequestMock, mite;
-    // momck a failed deleteProject request
-    deleteProjectRequestMock = function(options, done) {
+    // mock a failed deleteProject request
+    deleteProjectRequestMock = function(options) {
       var body, response;
       response = {
-        statusCode: 404,
-        req: {
-          method: 'POST'
+        status: 404,
+        data: {
+          error: 'Der Datensatz ist nicht vorhanden'
+        },
+        config: {
+          method: 'post'
         }
       };
-      body = {
-        error: 'Der Datensatz ist nicht vorhanden'
-      };
-      return done(null, response, body);
+      return Promise.resolve(response);
     };
     mite = miteApi({
       account: 'account',
@@ -140,7 +140,7 @@ describe('API', function() {
       account: 'account',
       apiKey: 'apikey',
       applicationName: 'applicationname',
-      request: requestMock
+      request: axiosMock
     });
     it('should be get all services', function(done) {
       return mite.getServices(function(err, services) {
@@ -225,7 +225,7 @@ describe('API', function() {
       account: 'account',
       apiKey: 'apikey',
       applicationName: 'applicationname',
-      request: requestMock
+      request: axiosMock
     });
     it('should be get all customers', function(done) {
       return mite.getCustomers(function(err, customers) {
@@ -315,7 +315,7 @@ describe('API', function() {
       account: 'account',
       apiKey: 'apikey',
       applicationName: 'applicationname',
-      request: requestMock
+      request: axiosMock
     });
     it('should be get all projects', function(done) {
       return mite.getProjects(function(err, projects) {
@@ -425,7 +425,7 @@ describe('API', function() {
       account: 'account',
       apiKey: 'apikey',
       applicationName: 'applicationname',
-      request: requestMock
+      request: axiosMock
     });
     it('should be get all users', function(done) {
       return mite.getUsers(function(err, users) {
@@ -503,7 +503,7 @@ describe('API', function() {
       account: 'account',
       apiKey: 'apikey',
       applicationName: 'applicationname',
-      request: requestMock
+      request: axiosMock
     });
     it('should be get all daily time entries', function(done) {
       return mite.getDailyTimeEntries(2013, 1, 1, function(err, entries) {
