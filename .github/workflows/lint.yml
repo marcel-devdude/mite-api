@@ -9,14 +9,14 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [8.x, 10.x, 12.x, 14.x]
+        node-version: [20.x, 22.x, 24.x]
 
     steps:
       - name: Check out Git repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v5
 
       - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v5
         with:
           node-version: ${{ matrix.node-version }}
 
@@ -25,7 +25,6 @@ jobs:
         run: npm install
 
       - name: Run linters
-        uses: samuelmeuli/lint-action@v1
+        uses: wearerequired/lint-action@v2
         with:
-          github_token: ${{ secrets.github_token }}
           eslint: true

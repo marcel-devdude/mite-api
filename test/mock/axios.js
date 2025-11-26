@@ -1,16 +1,19 @@
 'use strict';
 
-module.exports = function(options, done) {
-  var accountMock, body, customerMock, entryMock, err, method, projectMock, response, serviceMock, url, userMock;
-  err = null;
+module.exports = function(options) {
+  var accountMock, body, customerMock, entryMock, method, projectMock, response, serviceMock, url, userMock;
   url = options.url;
   method = options.method || 'GET';
+
+  // Create axios-compatible response structure
   response = {
-    statusCode: 200,
-    req: {
-      method: method
+    status: 200,
+    data: {},
+    config: {
+      method: method.toLowerCase()
     }
   };
+
   serviceMock = {
     service: {
       billable: true,
@@ -97,98 +100,103 @@ module.exports = function(options, done) {
       updated_at: "2013-05-01T12:32:47+02:00"
     }
   };
+
   switch (url) {
     case 'https://account.mite.de/services.json':
       if (options.method === 'POST') {
-        response.statusCode = 401;
+        response.status = 401;
         body = serviceMock;
       } else {
-        response.statusCode = 200;
+        response.status = 200;
         body = [serviceMock];
       }
       break;
     case 'https://account.mite.de/services/archived.json':
-      response.statusCode = 200;
+      response.status = 200;
       body = [serviceMock];
       break;
     case 'https://account.mite.de/services/1.json':
-      response.statusCode = 200;
+      response.status = 200;
       body = serviceMock;
       break;
     case 'https://account.mite.de/customers.json':
       if (options.method === 'POST') {
-        response.statusCode = 401;
+        response.status = 401;
         body = customerMock;
       } else {
-        response.statusCode = 200;
+        response.status = 200;
         body = [customerMock];
       }
       break;
     case 'https://account.mite.de/customers/archived.json':
-      response.statusCode = 200;
+      response.status = 200;
       body = [customerMock];
       break;
     case 'https://account.mite.de/customers/1.json':
-      response.statusCode = 200;
+      response.status = 200;
       body = customerMock;
       break;
     case 'https://account.mite.de/projects.json':
       if (options.method === 'POST') {
-        response.statusCode = 401;
+        response.status = 401;
         body = projectMock;
       } else {
-        response.statusCode = 200;
+        response.status = 200;
         body = [projectMock];
       }
       break;
     case 'https://account.mite.de/projects/archived.json':
-      response.statusCode = 200;
+      response.status = 200;
       body = [projectMock];
       break;
     case 'https://account.mite.de/projects/1.json':
-      response.statusCode = 200;
+      response.status = 200;
       body = projectMock;
       break;
     case 'https://account.mite.de/users.json':
-      response.statusCode = 200;
+      response.status = 200;
       body = [userMock];
       break;
     case 'https://account.mite.de/users/archived.json':
-      response.statusCode = 200;
+      response.status = 200;
       body = [userMock];
       break;
     case 'https://account.mite.de/users/1.json':
-      response.statusCode = 200;
+      response.status = 200;
       body = userMock;
       break;
     case 'https://account.mite.de/daily/2013/1/1.json':
-      response.statusCode = 200;
+      response.status = 200;
       body = [entryMock];
       break;
     case 'https://account.mite.de/time_entries.json':
       if (options.method === 'POST') {
-        response.statusCode = 401;
+        response.status = 401;
         body = entryMock;
       } else {
-        response.statusCode = 200;
+        response.status = 200;
         body = [entryMock];
       }
       break;
     case 'https://account.mite.de/time_entries/1.json':
-      response.statusCode = 200;
+      response.status = 200;
       body = entryMock;
       break;
     case 'https://account.mite.de/myself.json':
-      response.statusCode = 200;
+      response.status = 200;
       body = userMock;
       break;
     case 'https://account.mite.de/account.json':
-      response.statusCode = 200;
+      response.status = 200;
       body = accountMock;
       break;
     default:
-      response.statusCode = 200;
+      response.status = 200;
       body = {};
   }
-  return done(err, response, JSON.stringify(body));
+
+  response.data = body;
+
+  // Return a Promise that resolves with the response
+  return Promise.resolve(response);
 };
