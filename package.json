@@ -38,13 +38,14 @@
     "version": "npm run changelog && git add CHANGELOG.md"
   },
   "devDependencies": {
+    "@eslint/js": "9.39.1",
     "conventional-changelog-cli": "5.0.0",
     "conventional-recommended-bump": "11.2.0",
-    "eslint": "9.35.0",
-    "mocha": "11.7.2",
+    "eslint": "9.39.1",
+    "mocha": "11.7.5",
     "should": "^13.2.1"
   },
   "dependencies": {
-    "axios": "1.11.0"
+    "axios": "1.13.2"
   }
 }

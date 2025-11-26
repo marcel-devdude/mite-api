@@ -77,8 +77,8 @@ describe('API', function() {
   describe('getAccount', function() {
     var getAccountRequestMock, mite;
     // mock failed getAccount request
-    getAccountRequestMock = function(options) {
-      var body, response;
+    getAccountRequestMock = function() {
+      var response;
       response = {
         status: 400,
         data: {
@@ -107,8 +107,8 @@ describe('API', function() {
   describe('deleteProject', function() {
     var deleteProjectRequestMock, mite;
     // mock a failed deleteProject request
-    deleteProjectRequestMock = function(options) {
-      var body, response;
+    deleteProjectRequestMock = function() {
+      var response;
       response = {
         status: 404,
         data: {
