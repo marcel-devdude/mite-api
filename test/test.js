@@ -11,7 +11,7 @@ describe('Configuration', function() {
     mite = miteApi();
     mite.getOption('account').should.be.false;
     mite.getOption('apiKey').should.be.false;
-    return mite.getOption('applicationName').should.be.false;
+    mite.getOption('applicationName').should.be.false;
   });
   return it('should be overwrite default options', function() {
     var mite;
@@ -22,7 +22,7 @@ describe('Configuration', function() {
     });
     mite.getOption('account').should.be.equal('account');
     mite.getOption('apiKey').should.be.equal('apikey');
-    return mite.getOption('applicationName').should.be.equal('applicationname');
+    mite.getOption('applicationName').should.be.equal('applicationname');
   });
 });
 
@@ -34,7 +34,7 @@ describe('URL', function() {
       apiKey: 'apikey',
       applicationName: 'applicationname'
     });
-    return mite.getUrl('services').should.equal('https://account.mite.de/services.json');
+    mite.getUrl('services').should.equal('https://account.mite.de/services.json');
   });
   it('should be a valid API-URL with an api_key query-parameter', function() {
     var mite;
@@ -44,7 +44,7 @@ describe('URL', function() {
       applicationName: 'applicationname',
       query: true
     });
-    return mite.getUrl('services').should.equal('https://account.mite.de/services.json?api_key=apikey');
+    mite.getUrl('services').should.equal('https://account.mite.de/services.json?api_key=apikey');
   });
   it('should be a valid API-URL with a filter query-parameter', function() {
     var mite;
@@ -53,7 +53,7 @@ describe('URL', function() {
       apiKey: 'apikey',
       applicationName: 'applicationname'
     });
-    return mite.getUrl('services', {
+    mite.getUrl('services', {
       limit: 50,
       page: 2
     }).should.equal('https://account.mite.de/services.json?limit=50&page=2');
@@ -65,7 +65,7 @@ describe('URL', function() {
       apiKey: 'apikey',
       applicationName: 'applicationname'
     });
-    return mite.getUrl('dailyDate', {
+    mite.getUrl('dailyDate', {
       year: 2013,
       month: 1,
       day: 1
@@ -97,7 +97,7 @@ describe('API', function() {
       request: getAccountRequestMock
     });
     return it('when not found calls the callback with an error object', function(done) {
-      return mite.getAccount(function(err) {
+      mite.getAccount(function(err) {
         err.should.be.an.instanceOf(Error);
         err.message.should.equal('Whoops! We couldn\'t find your account');
         return done();
@@ -127,7 +127,7 @@ describe('API', function() {
       request: deleteProjectRequestMock
     });
     return it('calls done with rror when project was not found', function(done) {
-      return mite.deleteProject(21, function(err) {
+      mite.deleteProject(21, function(err) {
         err.should.be.an.instanceOf(Error);
         err.message.should.equal('Der Datensatz ist nicht vorhanden');
         return done();
@@ -143,7 +143,7 @@ describe('API', function() {
       request: axiosMock
     });
     it('should be get all services', function(done) {
-      return mite.getServices(function(err, services) {
+      mite.getServices(function(err, services) {
         services.should.have.length(1);
         services[0].service.should.have.property('billable');
         services[0].service.should.have.property('created_at');
@@ -157,7 +157,7 @@ describe('API', function() {
       });
     });
     it('should be get all archived services', function(done) {
-      return mite.getArchivedServices(function(err, services) {
+      mite.getArchivedServices(function(err, services) {
         services.should.have.length(1);
         services[0].service.should.have.property('billable');
         services[0].service.should.have.property('created_at');
@@ -171,7 +171,7 @@ describe('API', function() {
       });
     });
     it('should be get one service', function(done) {
-      return mite.getService(1, function(err, service) {
+      mite.getService(1, function(err, service) {
         service.service.should.have.property('billable');
         service.service.should.have.property('created_at');
         service.service.should.have.property('hourly_rate');
@@ -184,7 +184,7 @@ describe('API', function() {
       });
     });
     it('should be able to add new service', function(done) {
-      return mite.addService({
+      mite.addService({
         name: 'Service'
       }, function(err, service) {
         service.service.should.have.property('billable');
@@ -199,7 +199,7 @@ describe('API', function() {
       });
     });
     it('should be able to update service', function(done) {
-      return mite.updateService(1, {
+      mite.updateService(1, {
         name: 'Service'
       }, function(err, service) {
         service.service.should.have.property('billable');
@@ -214,7 +214,7 @@ describe('API', function() {
       });
     });
     return it('should be able to delete service', function(done) {
-      return mite.deleteService(1, function() {
+      mite.deleteService(1, function() {
         return done();
       });
     });
@@ -228,7 +228,7 @@ describe('API', function() {
       request: axiosMock
     });
     it('should be get all customers', function(done) {
-      return mite.getCustomers(function(err, customers) {
+      mite.getCustomers(function(err, customers) {
         customers.should.have.length(1);
         customers[0].customer.should.have.property('created_at');
         customers[0].customer.should.have.property('hourly_rate');
@@ -243,7 +243,7 @@ describe('API', function() {
       });
     });
     it('should be get all archived customers', function(done) {
-      return mite.getArchivedCustomers(function(err, customers) {
+      mite.getArchivedCustomers(function(err, customers) {
         customers.should.have.length(1);
         customers[0].customer.should.have.property('created_at');
         customers[0].customer.should.have.property('hourly_rate');
@@ -258,7 +258,7 @@ describe('API', function() {
       });
     });
     it('should be get one customer', function(done) {
-      return mite.getCustomer(1, function(err, customer) {
+      mite.getCustomer(1, function(err, customer) {
         customer.customer.should.have.property('created_at');
         customer.customer.should.have.property('hourly_rate');
         customer.customer.should.have.property('id');
@@ -272,7 +272,7 @@ describe('API', function() {
       });
     });
     it('should be able to add new customer', function(done) {
-      return mite.addCustomer({
+      mite.addCustomer({
         name: 'Customer'
       }, function(err, customer) {
         customer.customer.should.have.property('created_at');
@@ -288,7 +288,7 @@ describe('API', function() {
       });
     });
     it('should be able to update customer', function(done) {
-      return mite.updateCustomer(1, {
+      mite.updateCustomer(1, {
         name: 'Customer'
       }, function(err, customer) {
         customer.customer.should.have.property('created_at');
@@ -304,7 +304,7 @@ describe('API', function() {
       });
     });
     return it('should be able to delete customer', function(done) {
-      return mite.deleteCustomer(1, function() {
+      mite.deleteCustomer(1, function() {
         return done();
       });
     });
@@ -318,7 +318,7 @@ describe('API', function() {
       request: axiosMock
     });
     it('should be get all projects', function(done) {
-      return mite.getProjects(function(err, projects) {
+      mite.getProjects(function(err, projects) {
         projects.should.have.length(1);
         projects[0].project.should.have.property('budget');
         projects[0].project.should.have.property('budget_type');
@@ -337,7 +337,7 @@ describe('API', function() {
       });
     });
     it('should be get all archived projects', function(done) {
-      return mite.getArchivedProjects(function(err, projects) {
+      mite.getArchivedProjects(function(err, projects) {
         projects.should.have.length(1);
         projects[0].project.should.have.property('budget');
         projects[0].project.should.have.property('budget_type');
@@ -356,7 +356,7 @@ describe('API', function() {
       });
     });
     it('should be get one project', function(done) {
-      return mite.getProject(1, function(err, project) {
+      mite.getProject(1, function(err, project) {
         project.project.should.have.property('budget');
         project.project.should.have.property('budget_type');
         project.project.should.have.property('created_at');
@@ -374,7 +374,7 @@ describe('API', function() {
       });
     });
     it('should be able to add new project', function(done) {
-      return mite.addProject({
+      mite.addProject({
         name: 'Project'
       }, function(err, project) {
         project.project.should.have.property('budget');
@@ -394,7 +394,7 @@ describe('API', function() {
       });
     });
     it('should be able to update project', function(done) {
-      return mite.updateProject(1, {
+      mite.updateProject(1, {
         name: 'Project'
       }, function(err, project) {
         project.project.should.have.property('budget');
@@ -414,7 +414,7 @@ describe('API', function() {
       });
     });
     return it('should be able to delete project', function(done) {
-      return mite.deleteProject(1, function() {
+      mite.deleteProject(1, function() {
         return done();
       });
     });
@@ -428,7 +428,7 @@ describe('API', function() {
       request: axiosMock
     });
     it('should be get all users', function(done) {
-      return mite.getUsers(function(err, users) {
+      mite.getUsers(function(err, users) {
         users.should.have.length(1);
         users[0].user.should.have.property('created_at');
         users[0].user.should.have.property('email');
@@ -443,7 +443,7 @@ describe('API', function() {
       });
     });
     it('should be get all archived users', function(done) {
-      return mite.getArchivedUsers(function(err, users) {
+      mite.getArchivedUsers(function(err, users) {
         users.should.have.length(1);
         users[0].user.should.have.property('created_at');
         users[0].user.should.have.property('email');
@@ -458,7 +458,7 @@ describe('API', function() {
       });
     });
     it('should be get one user', function(done) {
-      return mite.getUser(1, function(err, user) {
+      mite.getUser(1, function(err, user) {
         user.user.should.have.property('created_at');
         user.user.should.have.property('email');
         user.user.should.have.property('id');
@@ -472,7 +472,7 @@ describe('API', function() {
       });
     });
     it('should be get myself', function(done) {
-      return mite.getMyself(function(err, user) {
+      mite.getMyself(function(err, user) {
         user.user.should.have.property('created_at');
         user.user.should.have.property('email');
         user.user.should.have.property('id');
@@ -486,7 +486,7 @@ describe('API', function() {
       });
     });
     return it('should be get the account', function(done) {
-      return mite.getAccount(function(err, account) {
+      mite.getAccount(function(err, account) {
         account.account.should.have.property('created_at');
         account.account.should.have.property('currency');
         account.account.should.have.property('id');
@@ -506,7 +506,7 @@ describe('API', function() {
       request: axiosMock
     });
     it('should be get all daily time entries', function(done) {
-      return mite.getDailyTimeEntries(2013, 1, 1, function(err, entries) {
+      mite.getDailyTimeEntries(2013, 1, 1, function(err, entries) {
         entries.should.have.length(1);
         entries[0].time_entry.should.have.property('billable');
         entries[0].time_entry.should.have.property('created_at');
@@ -529,7 +529,7 @@ describe('API', function() {
       });
     });
     it('should be get all time entries', function(done) {
-      return mite.getTimeEntries(function(err, entries) {
+      mite.getTimeEntries(function(err, entries) {
         entries.should.have.length(1);
         entries[0].time_entry.should.have.property('billable');
         entries[0].time_entry.should.have.property('created_at');
@@ -552,7 +552,7 @@ describe('API', function() {
       });
     });
     it('should be get one time entry', function(done) {
-      return mite.getTimeEntry(1, function(err, entry) {
+      mite.getTimeEntry(1, function(err, entry) {
         entry.time_entry.should.have.property('billable');
         entry.time_entry.should.have.property('created_at');
         entry.time_entry.should.have.property('date_at');
@@ -574,7 +574,7 @@ describe('API', function() {
       });
     });
     it('should be able to add new time entry', function(done) {
-      return mite.addTimeEntry({
+      mite.addTimeEntry({
         name: 'TimeEntry'
       }, function(err, entry) {
         entry.time_entry.should.have.property('billable');
@@ -598,7 +598,7 @@ describe('API', function() {
       });
     });
     it('should be able to update time entry', function(done) {
-      return mite.updateTimeEntry(1, {
+      mite.updateTimeEntry(1, {
         name: 'TimeEntry'
       }, function(err, entry) {
         entry.time_entry.should.have.property('billable');
@@ -622,7 +622,7 @@ describe('API', function() {
       });
     });
     return it('should be able to delete time entry', function(done) {
-      return mite.deleteTimeEntry(1, function() {
+      mite.deleteTimeEntry(1, function() {
         return done();
       });
     });
